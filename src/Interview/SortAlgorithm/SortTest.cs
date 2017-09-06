@@ -11,25 +11,31 @@ namespace Interview.SortAlgorithm
         const string expected = "2,2,2,3,3,4,4,5,5,6,6,7,8";
 
        [Fact]
-        public void BubbleTest()
+        public void BubbleSortTest()
         {
             Assert.Equal(expected, string.Join(",", new BubbleSort().Sort(new List<int>(array).ToArray(), array.Length)));
         }
 
         [Fact]
-        public void InsertionTest()
+        public void InsertionSortTest()
         {
             Assert.Equal(expected, string.Join(",", new InsertionSort().Sort(new List<int>(array).ToArray(), array.Length)));
         }
 
         [Fact]
-        public void QuickTest()
+        public void ShellSortTest()
+        {
+            Assert.Equal(expected, string.Join(",", new ShellSort().Sort(new List<int>(array).ToArray(), array.Length)));
+        }
+
+        [Fact]
+        public void QuickSortTest()
         {
             Assert.Equal(expected, string.Join(",", new QuickSort().Sort(new List<int>(array).ToArray(), array.Length)));
         }
 
         [Fact]
-        public void SelectionTest()
+        public void SelectionSortTest()
         {
             Assert.Equal(expected, string.Join(",", new SelectionSort().Sort(new List<int>(array).ToArray(), array.Length)));
         }
