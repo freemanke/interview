@@ -1,35 +1,135 @@
 ﻿using System;
+using System.Text;
 using Xunit;
 
 namespace Interview
 {
     public class Palindrome
     {
-        public bool IsPalindrome(string str)
+        /// <summary>
+        /// 严格区分大小写，从两头开始向中间靠拢
+        /// </summary>
+        public bool IsPalindrome1(string str)
         {
             if (str == null) return false;
-            var result = IsPalindrome(str, str.Length);
+            var result = IsPalindromeRecursive(str, str.Length);
             return result;
         }
 
-        private bool IsPalindrome(string str, int n)
+        private bool IsPalindromeRecursive(string str, int n)
         {
             if (n == 0 || n == 1) return true;
             if (str[0] == str[n - 1])
             {
-                return IsPalindrome(str.Substring(1, n - 2), n - 2);
+                return IsPalindromeRecursive(str.Substring(1, n - 2), n - 2);
             }
 
             return false;
         }
 
-        [Fact]
-        public void Test()
+        /// <summary>
+        /// 严格区分大消息，从中间开始往两边比较
+        /// </summary>
+        public bool IsPalindrome2(string str)
         {
-            Assert.False(new Palindrome().IsPalindrome(null));
-            Assert.True(new Palindrome().IsPalindrome(""));
-            Assert.True(new Palindrome().IsPalindrome("a"));
-            Assert.True(new Palindrome().IsPalindrome("aba"));
+            if (str == null) return false;
+            if (str.Length == 1) return true;
+
+            if (str.Length % 2 == 0)
+            {
+                var i = str.Length / 2 - 1;
+                var j = str.Length / 2;
+                while (i > 0)
+                    if (str[i--] != str[j++])
+                        return false;
+            }
+            else
+            {
+                var i = str.Length / 2;
+                var j = i;
+                while (i > 0)
+                    if (str[--i] != str[++j])
+                        return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 判读数字
+        /// </summary>
+        public bool IsPalindrome3(int x)
+        {
+            if (x == 0) return true;
+            if (x < 0 || x % 10 == 0) return false;
+
+            var revert = 0;
+            while (x > revert)
+            {
+                revert = revert * 10 + x % 10;
+                x /= 10;
+            }
+
+            return x == revert || x == revert / 10;
+        }
+
+        /// <summary>
+        /// 忽略大小写，放弃非数字和和字母的字符。
+        /// "A man, a plan, a canal: Panama" is a palindrome.
+        /// "race a car" is not a palindrome.
+        /// Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+        /// https://leetcode.com/problems/valid-palindrome/description/
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public bool IsPalindrome4(string s)
+        {
+            if (s == null) return false;
+            var sb = new StringBuilder();
+            foreach (var c in s)
+            {
+                if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')
+                    || (c >= '0' && c <= '9'))
+                    sb.Append(c);
+            }
+
+            return IsPalindrome2(sb.ToString().ToLower());
+        }
+
+        [Fact]
+        public void Test1()
+        {
+            Assert.False(new Palindrome().IsPalindrome1(null));
+            Assert.True(new Palindrome().IsPalindrome1(""));
+            Assert.True(new Palindrome().IsPalindrome1("a"));
+            Assert.True(new Palindrome().IsPalindrome1("aba"));
+            Assert.True(new Palindrome().IsPalindrome1("abba"));
+        }
+
+        [Fact]
+        public void Test2()
+        {
+            Assert.False(new Palindrome().IsPalindrome2(null));
+            Assert.True(new Palindrome().IsPalindrome2(""));
+            Assert.True(new Palindrome().IsPalindrome2("a"));
+            Assert.True(new Palindrome().IsPalindrome2("aba"));
+            Assert.True(new Palindrome().IsPalindrome2("abba"));
+        }
+
+        [Fact]
+        public void Test3()
+        {
+            Assert.True(new Palindrome().IsPalindrome3(0));
+            Assert.False(new Palindrome().IsPalindrome3(-1));
+            Assert.False(new Palindrome().IsPalindrome3(10));
+            Assert.True(new Palindrome().IsPalindrome3(121));
+            Assert.True(new Palindrome().IsPalindrome3(1221));
+        }
+
+        [Fact]
+        public void Test4()
+        {
+            Assert.True(new Palindrome().IsPalindrome4("A man, a plan, a canal: Panama"));
         }
     }
 }
