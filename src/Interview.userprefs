@@ -1,0 +1,19 @@
+﻿<Properties StartupConfiguration="{F6E3F7A6-A170-427A-8465-45EFE08B3FFF}|Default">
+  <MonoDevelop.Ide.ItemProperties.src.Interview PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Interview/Subset&#x8;&#x8;.cs">
+    <Files>
+      <File FileName="Interview/SortAlgorithm/BubbleSort.cs" Line="22" Column="10" />
+      <File FileName="Interview/Main/Program.cs" Line="1" Column="1" />
+      <File FileName="Interview/Main/Caculator.cs" Line="44" Column="1" />
+      <File FileName="../README.md" Line="19" Column="1" />
+      <File FileName="Interview/Subset&#x8;&#x8;.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.src.Main PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
