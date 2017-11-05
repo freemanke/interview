@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
@@ -96,6 +97,32 @@ namespace Interview
             return IsPalindrome2(sb.ToString().ToLower());
         }
 
+        public string LongestPalindromeSubstring(string s)
+        {
+            if (s == null) return null;
+            if (s.Length == 0 || s.Length == 1) return s;
+            if (s.Length == 2) return s[0] == s[1] ? s : s.Substring(0, 1);
+
+            var max = s.Substring(0, 1);
+            for (var i = 1; i < s.Length; i++)
+            {
+                var left = i - 1;
+                var right = i + 1;
+
+                while (left >= 0 && s[left] == s[i]) { left--; }
+                while (right < s.Length && s[right] == s[i]) { right++; }
+                while (left >= 0 && right < s.Length && s[left] == s[right]) { left--; right++; }
+
+                var find = s.Substring(left + 1, right - (left + 1));
+                if (find.Length > max.Length)
+                {
+                    max = find;
+                }
+            }
+
+            return max;
+        }
+
         [Fact]
         public void Test1()
         {
@@ -130,6 +157,17 @@ namespace Interview
         public void Test4()
         {
             Assert.True(new Palindrome().IsPalindrome4("A man, a plan, a canal: Panama"));
+        }
+
+        [Fact]
+        public void TestLongestPalindromeSubstring()
+        {
+            Assert.Equal("", new Palindrome().LongestPalindromeSubstring(""));
+            Assert.Equal("a", new Palindrome().LongestPalindromeSubstring("a"));
+            Assert.Equal("aa", new Palindrome().LongestPalindromeSubstring("aa"));
+            Assert.Equal("aba", new Palindrome().LongestPalindromeSubstring("aba"));
+            Assert.Equal("abba", new Palindrome().LongestPalindromeSubstring("abba"));
+            Assert.Equal("abba", new Palindrome().LongestPalindromeSubstring("abcdabba"));
         }
     }
 }
