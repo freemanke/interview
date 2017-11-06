@@ -5,20 +5,7 @@ using Xunit;
 namespace Interview
 {
     public class NQueens
-    {
-        [Fact]
-        public void Test()
-        {
-            var result = new NQueens().SolveNQueens(4);
-            foreach(var c in result)
-            {
-                foreach(var line in c)
-                {
-                    Console.WriteLine(line);
-                }
-            }
-        }
-        
+    {   
         public IList<IList<string>> SolveNQueens(int n)
         {
             var matrix = new char[n,n];
@@ -76,6 +63,19 @@ namespace Interview
             }
 
             return true;
+        }
+
+        [Fact]
+        public void Test()
+        {
+            var result = new NQueens().SolveNQueens(4);
+            foreach (var c in result)
+            {
+                foreach (var line in c)
+                {
+                    Console.WriteLine(line);
+                }
+            }
         }
     }
 }
